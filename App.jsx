@@ -62,7 +62,19 @@ qty,
 price:PRICES[size],
 sum:PRICES[size]*qty
 };
-
+fetch("https://script.google.com/macros/s/AKfycbwg1Puemq79NPkimkXk0f1iHIFrA4cTYz_J7voJgKBZbPwbli6sELotXWr18lTF4PYAhQ/exec", {
+method: "POST",
+body: JSON.stringify({
+date: record.date,
+restaurant: record.restaurant,
+plant: record.plant,
+size: record.size,
+qty: record.qty,
+price: record.price,
+sum: record.sum,
+note: ""
+})
+});
 setData([record,...data]);
 
 setPlant(null);
