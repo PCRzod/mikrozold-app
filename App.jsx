@@ -69,22 +69,23 @@ export default function App() {
 
     setData((prev) => [record, ...prev]);
 
-    fetch(SCRIPT_URL, {
-      method: "POST",
-      mode: "no-cors",
-      body: JSON.stringify({
-        action: "add",
-        id: record.id,
-        date: record.date,
-        restaurant: record.restaurant,
-        plant: record.plant,
-        size: record.size,
-        qty: record.qty,
-        price: record.price,
-        sum: record.sum,
-        note: record.note
-      })
-    }).catch(() => {});
+const params = new URLSearchParams({
+  action: "add",
+  id: record.id,
+  date: record.date,
+  restaurant: record.restaurant,
+  plant: record.plant,
+  size: record.size,
+  qty: String(record.qty),
+  price: String(record.price),
+  sum: String(record.sum),
+  note: record.note
+});
+
+fetch(`${SCRIPT_URL}?${params.toString()}`, {
+  method: "GET",
+  mode: "no-cors"
+}).catch(() => {});
 
     setPlant(null);
     setSize(null);
